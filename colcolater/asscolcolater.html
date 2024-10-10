@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./asscalcolater.css">
+    <title>Calculator</title>
+</head>
+<body>
+    <div class="main1"> 
+        <div class="shamci">
+            <hr class="line1"> 
+            <hr class="line2">
+            <hr class="line3">
+            <hr class="line4">
+            <hr class="line5">
+            <hr class="line6">
+        </div>
+        <input type="text" placeholder="0" name="" id="inputbox" readonly>
+        <div class="buttanparent">
+             <div class="button1">
+                <button class="oprater">AC</button>
+                <button class="oprater">DEL</button>
+                <button class="oprater">%</button>
+                <button class="oprater">/</button>
+             </div>
+             <div class="button2">
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button class="oprater">*</button>
+             </div>
+             <div class="button3">
+                <button>4</button>
+                <button>5</button>
+                <button>6</button>
+                <button class="oprater">-</button>
+             </div>
+             <div class="button4">
+                <button>7</button>
+                <button>8</button>
+                <button>9</button>
+                <button class="oprater">+</button>
+             </div>
+             <div class="button5">
+                <button>0</button>
+                <button>00</button>
+                <button>.</button>
+                <button class="oprater1">=</button>
+             </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let display = document.getElementById("inputbox");
+            let buttons = document.querySelectorAll("button");
+            let buttonsArray = Array.from(buttons);
+            let string = '';
+
+            buttonsArray.forEach(function (btn) {
+                btn.addEventListener('click', function (event) {
+                    const btnValue = event.target.innerHTML;
+
+                    // Clear the input
+                    if (btnValue === 'AC') {
+                        string = '';
+                    }
+                    // Delete the last character
+                    else if (btnValue === 'DEL') {
+                        string = string.slice(0, -1);
+                    }
+                    // Evaluate the expression
+                    else if (btnValue === '=') {
+                        try {
+                            string = eval(string).toString();
+                        } catch (error) {
+                            string = 'Error';
+                        }
+                    }
+                    // Add to the expression
+                    else {
+                        string += btnValue;
+                    }
+
+                    display.value = string;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
